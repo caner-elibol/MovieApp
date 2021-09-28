@@ -31,7 +31,7 @@ namespace MovieApp.Web.Controllers
             return View(m);
         }
         public IActionResult About()
-        {
+        { 
             return View();
         }
     }

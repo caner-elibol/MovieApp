@@ -10,5 +10,6 @@
     }
 </div>
 @section list{
-    @await Html.PartialAsync("_list",Model.Genres)
+    @*@await Html.PartialAsync("_list",Model.Genres)*@
+    @await Component.InvokeAsync("Genres") 
 }

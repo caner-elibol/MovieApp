@@ -42,17 +42,10 @@ namespace MovieApp.Web.Controllers
                     ImageUrl="3.jpg"
                 }
             };
-            var genre = new List<Genre> {
-                new Genre{Name="Macera"},
-                new Genre{Name="Komedi"},
-                new Genre{Name="Suç"},
-                new Genre{Name="Gerilim"},
-
-            };
             var model = new MovieGenreViewModel()
             {
-                Movies = filmListesi,
-                Genres = genre
+                Movies = filmListesi
+                
             };
             return View("Movies",model);
         }
