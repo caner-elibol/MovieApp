@@ -1,0 +1,10 @@
+﻿@model Movie
+
+@section header{
+    @await Html.PartialAsync("_jumbotron")
+}
+
+<h1>Kapak</h1>
+<div id="filmler">
+    @await Html.PartialAsync("_movie",Model)
+</div>
