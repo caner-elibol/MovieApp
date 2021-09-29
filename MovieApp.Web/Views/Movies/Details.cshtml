@@ -12,14 +12,23 @@
                     </h5>
                     <p class="card-text">Filmin Açıklaması : @Model.Description</p>
                     <p class="card-text">Filmin Yönetmeni: @Model.Director</p>
-                    <ul class="list-group">
-                        <li class="list-group-item">Oyuncuların Listesi</li>
-                        @foreach (var actor in Model.Actors)
-                        {
-                            <li class="list-group-item disabled" aria-disabled="true">@actor</li>
+                    @if (Model.Actors != null)
+                    {
+                        <ul class="list-group">
+                            @foreach (var actor in Model.Actors)
+                            {
+                                <li class="list-group-item disabled" aria-disabled="true">@actor</li>
 
-                        }
-                    </ul>
+                            }
+                        </ul>
+                    }
+                    <a asp-controller="Movies" asp-action="Edit" asp-route-id="@Model.MovieId" class="btn btn-warning mt-2 mb-2">Film Detaylarını Düzenle</a>
+                    <form asp-controller="Movies" asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="MovieId" value="@Model.MovieId" />
+                        <input type="hidden" name="Title" value="@Model.Title" />
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>

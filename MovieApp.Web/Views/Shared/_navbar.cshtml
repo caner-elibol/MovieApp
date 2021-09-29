@@ -15,7 +15,14 @@
                 <li class="nav-item active">
                     <a href="/movies" class="nav-link">Haberler</a>
                 </li>
+                <li class="nav-item active">
+                    <a href="/movies/create" class="nav-link">Film Ekle</a>
+                </li>
             </ul>
+            <form action="/movies/list" method="get" class="form-inline">
+                <input class="form-control mr-2" name="q" type="text" placeholder="Arama yap" />
+                <button class="btn btn-outline-light mr-0" type="submit">Ara</button>
+            </form>
         </div>
     </div>
 </nav>

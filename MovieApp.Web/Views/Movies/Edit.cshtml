@@ -1,0 +1,35 @@
+﻿@model Movie
+
+<h1>Edit Movie</h1>
+<hr />
+<form method="post" asp-controller="Movies" asp-action="Edit">
+    <input type="hidden" name="MovieId" value="@Model.MovieId" />
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" id="Title" placeholder="Fight Club" value="@Model.Title">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea class="form-control" id="Description" asp-for="Description" value="@Model.Description" rows="4" placeholder="Konusu Döğüş"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Director"></label>
+        <input asp-for="Director" class="form-control" id="Director" value="@Model.Director" placeholder="J. K. Rowling">
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl">Filmin Afişi</label>
+        <input asp-for="ImageUrl" class="form-control" id="ImageUrl" value="@Model.ImageUrl" placeholder="1.jpg">
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GenreId">Example multiple select</label>
+        <select class="form-control" asp-for="GenreId" asp-items="ViewBag.Genres">
+            <option selected disabled>Seçiniz</option>
+        </select>
+        <span asp-validation-for="GenreId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Düzenlemeyi Bitir</button>
+</form>

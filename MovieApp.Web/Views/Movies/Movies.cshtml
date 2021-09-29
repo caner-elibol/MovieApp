@@ -4,12 +4,26 @@
 
 <h1>Film Listesi</h1>
 <div id="filmler">
+
+    @if (!(Model.Movies.Count() > 0))
+    {
+        <div class="alert alert-warning">
+            Film bulunamadı
+        </div>
+    }
     @foreach (var movie in Model.Movies)
     {
-        @await Html.PartialAsync("_movie",movie)
+        @await Html.PartialAsync("_movie", movie)
     }
 </div>
+@if (TempData["Message"] != null)
+{
+    @section message{
+        @await Html.PartialAsync("_message",(String)TempData["Message"])
+    }
+}
+
 @section list{
     @*@await Html.PartialAsync("_list",Model.Genres)*@
-    @await Component.InvokeAsync("Genres") 
+    @await Component.InvokeAsync("Genres")
 }

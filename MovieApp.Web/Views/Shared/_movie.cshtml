@@ -8,14 +8,19 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Title</h5>
-                    <p class="card-text"><a href="/movies/details/@Model.MovieId">Film Detaylarını İncele</a></p>
-                    <ul class="list-group" >
-                        @foreach (var actor in Model.Actors)
-                        {
-                        <li class="list-group-item disabled" aria-disabled="true">@actor</li>                            
-                        }       
-                    </ul>
-                    
+
+
+                    @if (Model.Actors != null)
+                    {
+                        <ul class="list-group">
+                            @foreach (var actor in Model.Actors)
+                            {
+                                <li class="list-group-item disabled" aria-disabled="true">@actor</li>
+
+                            }
+                        </ul>
+                    }
+                    <a asp-controller="Movies" asp-action="Details" asp-route-id="@Model.MovieId" class="btn btn-primary mt-2">Film Detaylarını İncele</a>
                 </div>
             </div>
         </div>
