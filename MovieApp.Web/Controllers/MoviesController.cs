@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieApp.Web.Data;
 using MovieApp.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -15,43 +16,16 @@ namespace MovieApp.Web.Controllers
         }
         public IActionResult List()
         {
-            var filmListesi = new List<Movie>()
+            var model = new MoviesViewModel()
             {
-                new Movie
-                {
-                    Title="Esaretin Bedeli",
-                    Description="Kaçma konusu",
-                    Director="Kimdi Bilmiyorum",
-                    Actors=new string[]{"Brad Pitt","Angelina Jolie"},
-                    ImageUrl="1.jpg"
-                },
-                new Movie
-                {
-                    Title="Wanted",
-                    Description="Suç",
-                    Director="Kimdi Bilmiyorum",
-                    Actors=new string[]{"Oscar Wilde","Angelina Jolie"},
-                    ImageUrl="2.jpg"
-                },
-                new Movie
-                {
-                    Title="Recep İvedik",
-                    Description="Komedi",
-                    Director="Togan Gökbakar",
-                    Actors=new string[]{"Şahan Gökbakar","Cem Gecici"},
-                    ImageUrl="3.jpg"
-                }
-            };
-            var model = new MovieGenreViewModel()
-            {
-                Movies = filmListesi
+                Movies = MovieRepository.Movies
                 
             };
             return View("Movies",model);
         }
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View();
+            return View(MovieRepository.GetById(id));
         }
     }
 }

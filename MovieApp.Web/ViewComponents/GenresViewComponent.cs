@@ -10,13 +10,8 @@ namespace MovieApp.Web.ViewComponents
     public class GenresViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke() {
-            var genre = new List<Genre> {
-                new Genre{Name="Macera"},
-                new Genre{Name="Komedi"},
-                new Genre{Name="Suç"},
-                new Genre{Name="Gerilim"},
-            };
-            return View(genre);
+            
+            return View(GenreRepository.Genres);
         }
     }
 }

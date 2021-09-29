@@ -1,10 +1,15 @@
-﻿@model Movie
+﻿@model HomePageViewModel
 
 @section header{
     @await Html.PartialAsync("_jumbotron")
 }
 
-<h1>Kapak</h1>
+<h1>Kapak Sayfası</h1>
 <div id="filmler">
-    @await Html.PartialAsync("_movie",Model)
+
+    @foreach (var movie in Model.PopularMovies)
+    {
+        @await Html.PartialAsync("_movie", movie)
+    }
+
 </div>

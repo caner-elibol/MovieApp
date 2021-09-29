@@ -8,15 +8,14 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">@Model.Title</h5>
-                    <p class="card-text">@Model.Description</p>
-                    <p class="card-text"><small class="text-muted">@Model.Director</small></p>
-                    <ul class="list-group">
+                    <p class="card-text"><a href="/movies/details/@Model.MovieId">Film Detaylarını İncele</a></p>
+                    <ul class="list-group" >
                         @foreach (var actor in Model.Actors)
                         {
                         <li class="list-group-item disabled" aria-disabled="true">@actor</li>                            
-                        }
-       
+                        }       
                     </ul>
+                    
                 </div>
             </div>
         </div>
