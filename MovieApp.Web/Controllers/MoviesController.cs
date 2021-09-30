@@ -12,6 +12,11 @@ namespace MovieApp.Web.Controllers
 {
     public class MoviesController : Controller
     {
+        private readonly MovieContext _context;
+        public MoviesController(MovieContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {      
             return View();
@@ -21,21 +26,22 @@ namespace MovieApp.Web.Controllers
             //var controller = RouteData.Values["controller"];
             //var action = RouteData.Values["action"];
             //var genreid = RouteData.Values["id"];
-            var movies = MovieRepository.Movies;
-            
+
+            //var movies = MovieRepository.Movies;
+            var movies = _context.Movies.AsQueryable();
             if (id!=null)
             {
-                movies = movies.Where(m => m.GenreId == id).ToList();
+                movies = movies.Where(m => m.GenreId == id);
             }
             if (!string.IsNullOrEmpty(q))
             {
                 movies = movies.Where(i =>
                   i.Title.ToLower().Contains(q.ToLower()) ||
-                  i.Description.ToLower().Contains(q.ToLower())).ToList();
+                  i.Description.ToLower().Contains(q.ToLower()));
             }
             var model = new MoviesViewModel()
             {
-                Movies = movies
+                Movies = movies.ToList()
                 
             };
             
@@ -43,11 +49,11 @@ namespace MovieApp.Web.Controllers
         }
         public IActionResult Details(int id)
         {
-            return View(MovieRepository.GetById(id));
+            return View(_context.Movies.Find(id));
         }
         public IActionResult Create()
         {
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreId", "Name");
             return View();
         }
         [HttpPost]
@@ -55,41 +61,48 @@ namespace MovieApp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                _context.Movies.Add(m);
+                _context.SaveChanges();
                 
-                MovieRepository.Add(m);
                 TempData["Message"] = $"{m.Title} Adlı Film Eklendi";
-                return RedirectToAction("List");
+                return RedirectToAction("list", "movies");
             }
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreId", "Name");
             return View();
             
         }
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
-            return View(MovieRepository.GetById(id));
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreId", "Name");
+            return View(_context.Movies.Find(id));
         }
         [HttpPost]
         public IActionResult Edit(Movie m)
         {
             if (ModelState.IsValid)
             {
-                MovieRepository.Edit(m);
+                
+                _context.Movies.Update(m);
+                _context.SaveChanges();
+                //MovieRepository.Edit(m);
                 TempData["Message"] = $"{m.Title} Adlı Film Düzenlendi";
-                return RedirectToAction("Details", "Movies", new { @id = m.MovieId });
+                return RedirectToAction("details", "movies", new { @id = m.MovieId });
             }
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreId", "Name");
             return View(m);
             
         }
         [HttpPost]
         public IActionResult Delete(int MovieId, string Title)
         {
+            var entity = _context.Movies.Find(MovieId);// silinecek movieyi bulduk
 
-            MovieRepository.Delete(MovieId);
+            _context.Movies.Remove(entity);//sildik
+            _context.SaveChanges();//kaydetmezsen silinme işlemi tamamlanmaz.
+            //MovieRepository.Delete(MovieId);
             TempData["Message"] = $"{Title} isimli film silindi";
-            return RedirectToAction("List");
+            return RedirectToAction("list", "movies");
 
         }
 

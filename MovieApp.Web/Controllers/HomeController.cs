@@ -8,14 +8,22 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Controllers
 {
+    
     public class HomeController : Controller
     {
+        private readonly MovieContext _context;
+        public HomeController(MovieContext context)
+        {
+            _context = context ;
+        }
         public IActionResult Index()
         {
+       
+
             var m = new HomePageViewModel
             {
-                PopularMovies = MovieRepository.Movies
-            };
+                PopularMovies = _context.Movies.ToList()
+        };
             return View(m);
         }
         public IActionResult About()

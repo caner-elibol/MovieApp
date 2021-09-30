@@ -10,7 +10,7 @@
                     <h5 class="card-title">@Model.Title</h5>
 
 
-                    @if (Model.Actors != null)
+                    @*@if (Model.Actors != null)
                     {
                         <ul class="list-group">
                             @foreach (var actor in Model.Actors)
@@ -19,8 +19,8 @@
 
                             }
                         </ul>
-                    }
-                    <a asp-controller="Movies" asp-action="Details" asp-route-id="@Model.MovieId" class="btn btn-primary mt-2">Film Detaylarını İncele</a>
+                    }*@
+                    <a asp-controller="movies" asp-action="details" asp-route-id="@Model.MovieId" class="btn btn-primary mt-2">Film Detaylarını İncele</a>
                 </div>
             </div>
         </div>
