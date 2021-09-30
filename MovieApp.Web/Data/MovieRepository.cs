@@ -1,4 +1,5 @@
-﻿using MovieApp.Web.Models;
+﻿using MovieApp.Web.Entity;
+using MovieApp.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,7 @@ namespace MovieApp.Web.Data
                 }
             };
         }
+
         public static List<Movie> Movies
         {
             get
