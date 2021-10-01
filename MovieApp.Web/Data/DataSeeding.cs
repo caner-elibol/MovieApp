@@ -28,7 +28,6 @@ namespace MovieApp.Web.Data
                         MovieId = 1,
                         Title = "Recep İvedik",
                         Description = "Acıklama",
-                        Director = "Togan Gökbakar",
                         ImageUrl = "1.jpg",
                         GenreId = 3
                     },
@@ -37,7 +36,6 @@ namespace MovieApp.Web.Data
                         MovieId = 2,
                         Title = "Recep İvedik",
                         Description = "Acıklama",
-                        Director = "Togan Gökbakar",
                         ImageUrl = "1.jpg",
                         GenreId = 1
                     },
@@ -46,7 +44,6 @@ namespace MovieApp.Web.Data
                         MovieId = 3,
                         Title = "Recep İvedik",
                         Description = "Acıklama",
-                        Director = "Togan Gökbakar",
                         ImageUrl = "1.jpg",
                         GenreId = 2
                     },
@@ -55,7 +52,6 @@ namespace MovieApp.Web.Data
                         MovieId = 4,
                         Title = "Recep İvedik",
                         Description = "Acıklama",
-                        Director = "Togan Gökbakar",
                         ImageUrl = "1.jpg",
                         GenreId = 1
                     },
@@ -64,7 +60,6 @@ namespace MovieApp.Web.Data
                         MovieId = 5,
                         Title = "Recep İvedik",
                         Description = "Acıklama",
-                        Director = "Togan Gökbakar",
                         ImageUrl = "1.jpg",
                         GenreId = 3
                     },
@@ -73,7 +68,6 @@ namespace MovieApp.Web.Data
                         MovieId = 6,
                         Title = "Recep İvedik",
                         Description = "Acıklama",
-                        Director = "Togan Gökbakar",
                         ImageUrl = "1.jpg",
                         GenreId = 2
                     });
