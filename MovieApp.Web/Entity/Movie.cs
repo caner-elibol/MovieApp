@@ -10,9 +10,9 @@ namespace MovieApp.Web.Entity
     {
         
         public int MovieId { get; set; }
-        [Required]
+        
         public string Title { get; set; }
-        [MaxLength(500)]
+        
         public string Description { get; set; }
         
         public string ImageUrl { get; set; }
