@@ -97,7 +97,7 @@ namespace MovieApp.Web.Controllers
             
         }
         [HttpPost]
-        public IActionResult Delete(int MovieId, string Title)
+        public IActionResult MovieDelete(int MovieId, string Title)
         {
             var entity = _context.Movies.Find(MovieId);// silinecek movieyi bulduk
 
@@ -105,7 +105,7 @@ namespace MovieApp.Web.Controllers
             _context.SaveChanges();//kaydetmezsen silinme işlemi tamamlanmaz.
             //MovieRepository.Delete(MovieId);
             TempData["Message"] = $"{Title} isimli film silindi";
-            return RedirectToAction("list", "movies");
+            return RedirectToAction("movielist", "admin");
 
         }
 

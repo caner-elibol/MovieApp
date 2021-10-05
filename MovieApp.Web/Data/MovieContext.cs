@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MovieApp.Web.Entity;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace MovieApp.Web.Data
 {
     public class MovieContext:DbContext
     {
+        public static readonly ILoggerFactory MyLoggerFactory
+        = LoggerFactory.Create(builder => { builder.AddConsole(); });
         public MovieContext(DbContextOptions<MovieContext> options):base(options)
         {
 
@@ -20,10 +23,10 @@ namespace MovieApp.Web.Data
         public DbSet<Cast> Casts { get; set; }
         public DbSet<Crew> Crews { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlite("Data")
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>()

@@ -1,0 +1,66 @@
+﻿@model AdminMoviesViewModel
+    <div class="row">
+        <div class="col-md-4 offset-4">
+            <h1>Yönetim Paneli</h1>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-6">
+        <a href="/admin/moviecreate" class="btn btn-success btn-block btn-lg mb-2">Yeni Film Ekle</a>
+    </div>
+    <div class="col-md-6">
+        <a href="/admin/genrelist" class="btn btn-outline-primary btn-block btn-lg mb-2">Kategorileri Görüntüle</a>
+    </div>
+</div>
+
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th style="width:30px">#</th>
+            <th style="width:90px">Image</th>
+            <th>Title</th>
+            <th style="width:70px">Genres</th>
+            <th style="width:140px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>
+                    @movie.MovieId
+                </td>
+                <td>
+                    <img src="~/img/@movie.ImageUrl" width="80" alt="@movie.Title Afiş" />
+                </td>
+                <td>
+                    @movie.Title
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var genre in movie.Genres)
+                        {
+                            <li>@genre.Name</li>
+                        }
+                    </ul>
+
+                </td>
+                <td>
+                    <a href="/admin/movieupdate/@movie.MovieId" class="btn btn-primary btn-block btn-sm mb-2">Güncelle</a>
+                    <form asp-controller="admin" asp-action="moviedelete" method="post" style="display:inline;">
+                        <input type="hidden" name="MovieId" value="@movie.MovieId" />
+                        <input type="hidden" name="Title" value="@movie.Title" />
+                        <button type="submit" class="btn btn-danger btn-block btn-sm mb-2">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@if (TempData["Message"] != null)
+{
+    @section message{
+        @await Html.PartialAsync("_message", (String)TempData["Message"])
+    }
+}
